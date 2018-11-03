@@ -1,0 +1,30 @@
+/* #EAE7DC
+ * #D8C3A5
+ * #8E8D8A
+ * #E98074
+ * #E85A4F
+ */
+
+@font-face {
+    font-family: font_minimal;
+    src: url(./fonts/TallFilmsExpanded.ttf);
+}
+@font-face {
+	font-family: whola;
+	src: url(./fonts/whola.ttf);
+}
+
+body {
+	background-color: #EAE7DC;
+	color: #8E8D8A;
+	font-family: "whola";
+}
+
+.main_menu {
+	margin-top: 32px;
+	margin-left: 32px;
+}
+
+.main_menu a {
+	text-decoration: none;
+}

@@ -1,0 +1,5 @@
+Helpful pages:
+https://www.w3schools.com
+http://php.net/docs.php
+https://stackoverflow.com
+https://zinoui.com/blog/storing-passwords-securely
