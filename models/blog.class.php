@@ -104,6 +104,69 @@ class Blog
         return $post;
     }
 
+    public function GetPosts($gameName, $userName, $tags)
+    {
+        $condition = "WHERE ";
+
+        if ($gameName != "")
+        {
+            $condition = $condition . "games.`g_name`='" . $gameName . "' AND ";
+        }
+        if ($userName != "")
+        {
+            $condition = $condition .  "users.`u_username`='" . $userName . "' AND ";
+        }
+
+        if ($gameName == "" && $userName == "")
+        {
+            $condition = "";
+        }
+        else
+        {
+            // Cut the " AND " at the end of the $condition string
+            $condition = substr($condition, 0, -5);
+        }
+
+        $this->result = $this->conn->query("
+            SELECT blogs.`b_title`, 
+                   blogs.`b_content`, 
+                   blogs.`b_date`, 
+                   games.`g_name`, 
+                   users.`u_username`, 
+                   blogs.`b_tags` 
+            FROM blogs 
+            INNER JOIN games ON blogs.`b_game_id`=games.`g_id`
+            INNER JOIN users ON blogs.`b_author_id`=users.`u_id`
+            ".$condition."
+            ORDER BY blogs.`b_date`
+        ");
+
+        $post = array(array());
+
+        if ($this->result->num_rows > 0)
+        {
+            $i = 0;
+            while ($this->row = $this->result->fetch_assoc()) // or fetch_array
+            {
+                // Success
+                $post[$i] = array($this->row['b_title'],
+                                  $this->row['b_content'],
+                                  $this->row['b_date'],
+                                  $this->row['g_name'],
+                                  $this->row['u_username'],
+                                  $this->row['b_tags']);
+                $i++;
+            }
+        }
+        else
+        {
+            // Fail
+            return NULL;
+        }
+
+        return $post;
+    }
+
     /**
      * Other functions ---------------------------------------------------------
      */

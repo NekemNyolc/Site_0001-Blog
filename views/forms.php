@@ -246,14 +246,41 @@ class Forms
     /**
      * Search forms ------------------------------------------------------------
      */
-    public function SearchPostForm()
+    public function SearchPostForm($games)
     {
         ?>
         <div class="jumbotron bg-secondary">
             <form class="form-inline" method="POST">
+                <div class="form-group">
+                    <select class="form-control" 
+                            id="input_game" 
+                            name="input_game">
+                        <option value="">All games</option>
+                        <?php
+                        foreach ($games as $game)
+                        {
+                            ?><option value="<?php echo $game; ?>"><?php
+                                echo $game;
+                            ?></option><?php 
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Username"
+                           id="input_username"
+                           name="input_username">
+                </div>
                 <input class="form-control mr-sm-2" 
                        type="text" 
-                       placeholder="Search">
+                       placeholder="Tags"
+                       id="input_tags"
+                       name="input_tags">
                 <input type="submit" 
                        name="cmd_search_post"
                        id="cmd_search_post"

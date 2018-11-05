@@ -92,6 +92,11 @@ class Body
 
     public function PageBlogList($blogList)
     {
+        if (is_null($blogList))
+        {
+            echo "No data!";
+            exit();
+        }
         for ($row=0; $row < count($blogList); $row++)
         {
             ?>

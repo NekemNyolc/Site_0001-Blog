@@ -44,7 +44,30 @@ if (isset($_POST['cmd_delete']))
 // Searching for a post
 if (isset($_POST['cmd_search_post']))
 {
+    // Navigation
+    $view = new Header();
+    $view->LoggedInHeader();
 
+    // Ask database for games
+    $game = new Game();
+    $games = $game->GetGameList();
+
+    // Search bar
+    $view = new Forms();
+    $view->SearchPostForm($games);
+
+    // Ask database for all blog posts
+    $blog = new Blog();
+    $blogList = $blog->GetPosts(
+        $_POST['input_game'],
+        $_POST['input_username'],
+        $_POST['input_tags']
+    );
+
+    // Show the posts
+    $view = new Body();
+    $view->PageBlogList($blogList);
+    exit();
 }
 
 // Updating profile data
@@ -163,8 +186,14 @@ elseif (isset($_GET['blog']))
         // Navigation
         $view = new Header();
         $view->LoggedInHeader();
+
+        // Ask database for games
+        $game = new Game();
+        $games = $game->GetGameList();
+
+        // Search bar
         $view = new Forms();
-        $view->SearchPostForm();
+        $view->SearchPostForm($games);
 
         // Ask database for all blog posts
         $blog = new Blog();
