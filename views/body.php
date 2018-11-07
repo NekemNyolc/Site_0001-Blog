@@ -68,11 +68,20 @@ class Body
     public function PageProfile(
         $username, 
         $email, 
-        $realname)
+        $realname,
+        $image)
     {
         ?>
         <div class="jumbotron">
             <h1>Profile</h1>
+            <p>
+                <img src="<?php echo $image; ?>" 
+                     style="width: 256px; height: 256px;">
+                <a href="index.php?profile=modify_image"
+                   class="btn btn-success">
+                    Edit image
+                </a>
+            </p>
             <p>
                 Username: <?php echo $username; ?>
             </p>
@@ -160,7 +169,7 @@ class Body
             ?>
             <div class="card" style="width: 300px; display: inline-block;">
                 <div class="card-header bg-primary">
-                    <img src="<?php echo $card[3]; ?>" style="width: 256px;">
+                    <img src="<?php echo $card[3]; ?>" style="width: 256px; height: 256px;">
                 </div>
                 <div class="card-body">
                     <p>

@@ -105,12 +105,14 @@ class User
                 u_username, 
                 u_email, 
                 u_password,
-                u_realname
+                u_realname,
+                u_image
             ) VALUES (
                 '".$_POST['input_username']."',
                 '".$_POST['input_email']."',
                 ENCODE('".$password."', '".$secret."'),
-                '".$_POST['input_realname']."'
+                '".$_POST['input_realname']."',
+                './images/_default.png'
         )";
 
         if ($this->conn->query($this->sql) === TRUE)
@@ -141,7 +143,8 @@ class User
         $this->result = $this->conn->query("
             SELECT `u_username`,
                    `u_email`,
-                   `u_realname` 
+                   `u_realname`,
+                   `u_image` 
             FROM `users` 
             WHERE `u_username`='".$_SESSION['username']."'
         ");
@@ -153,7 +156,8 @@ class User
                 $userData = array(
                     "username"=>$this->row['u_username'], 
                     "email"=>$this->row['u_email'], 
-                    "realname"=>$this->row['u_realname']
+                    "realname"=>$this->row['u_realname'],
+                    "image"=>$this->row['u_image']
                 );
 
                 return $userData;
@@ -251,6 +255,31 @@ class User
                 header("Location: index.php?errorpage=fail_profile");
                 exit();
                 // echo "Error updating record: " . $this->conn->error;
+            }
+        }
+    }
+
+    public function UploadImage($image)
+    {
+        if (!is_null($image))
+        {
+            $this->sql = "
+                UPDATE `users` 
+                SET `u_image`='".$image."' 
+                WHERE `u_username`='".$_SESSION['username']."'
+            ";
+
+            if ($this->conn->query($this->sql) === TRUE)
+            {
+                // Success
+                header("Location: index.php?errorpage=success");
+                exit();
+            }
+            else
+            {
+                // Fail
+                header("Location: index.php?errorpage=fail_profile");
+                exit();
             }
         }
     }

@@ -188,6 +188,26 @@ class Forms
         <?php
     }
 
+    public function ModifyImageForm()
+    {
+        ?>
+        <div class="jumbotron">
+        <form method="POST" 
+              enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fileToUpload">Select image to upload:</label>
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" 
+                       value="Upload Image" 
+                       name="cmd_image"
+                       id="cmd_image" 
+                       class="btn btn-primary">
+            </div>
+        </form>
+        </div>
+        <?php
+    }
+
     public function BlogCreateForm($games)
     {
         ?>

@@ -114,6 +114,17 @@ if (isset($_POST['cmd_profile']))
     );
 }
 
+// Uploading profile image
+if (isset($_POST['cmd_image']))
+{
+    $file_name = "./images/" . $_FILES["fileToUpload"]["name"];
+
+    include './controllers/controller_upload.php';
+
+    $user = new User();
+    $user->UploadImage($file_name);
+}
+
 /**
  * Site structure --------------------------------------------------------------
  */
@@ -140,6 +151,16 @@ if (isset($_GET['profile']))
             $userData['realname']
         );
     }
+    elseif ($_GET['profile'] == "modify_image")
+    {
+        // Navigation
+        $view = new Header();
+        $view->LoggedInHeader();
+
+        // Body
+        $view = new Forms();
+        $view->ModifyImageForm();
+    }
     else
     {
         // Navigation
@@ -155,7 +176,8 @@ if (isset($_GET['profile']))
         $view->PageProfile(
             $userData['username'], 
             $userData['email'], 
-            $userData['realname']
+            $userData['realname'],
+            $userData['image']
         );
     }
 }
