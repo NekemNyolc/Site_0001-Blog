@@ -61,7 +61,8 @@ if (isset($_POST['cmd_search_post']))
     $blogList = $blog->GetPosts(
         $_POST['input_game'],
         $_POST['input_username'],
-        $_POST['input_tags']
+        $_POST['input_tags'],
+        $_POST['input_order']
     );
 
     // Show the posts
@@ -220,6 +221,14 @@ elseif (isset($_GET['userlist']))
     // Navigation
     $view = new Header();
     $view->LoggedInHeader();
+
+    // Ask database for all users
+    $user = new User();
+    $userCards = $user->UserCards();
+
+    // Show the users
+    $view = new Body();
+    $view->UserCards($userCards);
 }
 elseif (isset($_GET['errorpage']))
 {

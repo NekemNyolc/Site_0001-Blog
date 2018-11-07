@@ -22,6 +22,7 @@ switch ($_GET['errorpage']) {
     case 'fail_registration':
     case 'fail_bloglist':
     case 'fail_gamelist':
+    case 'fail_userlist':
         $view->PageError("Maybe database or network error!");
         break;
 

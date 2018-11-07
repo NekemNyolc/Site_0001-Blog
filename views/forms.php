@@ -281,6 +281,14 @@ class Forms
                        placeholder="Tags"
                        id="input_tags"
                        name="input_tags">
+                <div class="form-group">
+                    <select class="form-control"
+                            id="input_order"
+                            name="input_order">
+                        <option value="date_new">Date (New)</option>
+                        <option value="date_old">Date (old)</option>
+                    </select>
+                </div>
                 <input type="submit" 
                        name="cmd_search_post"
                        id="cmd_search_post"

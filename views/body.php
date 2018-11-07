@@ -134,6 +134,54 @@ class Body
     }
 
     /**
+     * User list ---------------------------------------------------------------
+     */
+    public function UserCards($userCards)
+    {
+        if (is_null($userCards))
+        {
+            echo "No data!";
+            exit();
+        }
+
+        # card[0]: u_username
+        # card[1]: u_email
+        # card[2]: u_realname
+        # card[3]: u_image
+        # card[4]: u_regdate
+
+        foreach ($userCards as $card)
+        {
+            if (is_null($card[3]))
+            {
+                $card[3] = "./images/_default.png";
+            }
+
+            ?>
+            <div class="card" style="width: 300px; display: inline-block;">
+                <div class="card-header bg-primary">
+                    <img src="<?php echo $card[3]; ?>" style="width: 256px;">
+                </div>
+                <div class="card-body">
+                    <p>
+                        <strong>Username: </strong><?php echo $card[0]; ?>
+                    </p>
+                    <p>
+                        <strong>E-mail: </strong><?php echo $card[1]; ?>
+                    </p>
+                    <p>
+                        <strong>Real name: </strong><?php echo $card[2]; ?>
+                    </p>
+                    <p>
+                        <strong>Registration date: </strong><?php echo $card[4]; ?>
+                    </p>
+                </div>
+            </div>
+            <?php
+        }
+    }
+
+    /**
      * Error page --------------------------------------------------------------
      */
     public function PageError($errormessage)

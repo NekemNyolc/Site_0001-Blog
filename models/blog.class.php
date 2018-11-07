@@ -104,7 +104,7 @@ class Blog
         return $post;
     }
 
-    public function GetPosts($gameName, $userName, $tags)
+    public function GetPosts($gameName, $userName, $tags, $order)
     {
         $condition = "WHERE ";
 
@@ -114,7 +114,7 @@ class Blog
         }
         if ($userName != "")
         {
-            $condition = $condition .  "users.`u_username`='" . $userName . "' AND ";
+            $condition = $condition .  "users.`u_username` LIKE '%" . $userName . "%' AND ";
         }
 
         if ($gameName == "" && $userName == "")
@@ -125,6 +125,20 @@ class Blog
         {
             // Cut the " AND " at the end of the $condition string
             $condition = substr($condition, 0, -5);
+        }
+
+        if ($order == "date_new")
+        {
+            $order = "blogs.`b_date` DESC";
+        }
+        elseif ($order == "date_old")
+        {
+            $order = "blogs.`b_date` ASC";
+        }
+        else
+        {
+            header("Location: index.php?errorpage");
+            exit();
         }
 
         $this->result = $this->conn->query("
@@ -138,7 +152,7 @@ class Blog
             INNER JOIN games ON blogs.`b_game_id`=games.`g_id`
             INNER JOIN users ON blogs.`b_author_id`=users.`u_id`
             ".$condition."
-            ORDER BY blogs.`b_date`
+            ORDER BY ".$order."
         ");
 
         $post = array(array());

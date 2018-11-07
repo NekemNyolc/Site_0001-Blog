@@ -255,6 +255,38 @@ class User
         }
     }
 
+    /**
+     * User cards --------------------------------------------------------------
+     */
+    public function UserCards()
+    {
+        $this->result = $this->conn->query("
+            SELECT *
+            FROM users
+        ");
+
+        $userCards = array();
+
+        if ($this->result->num_rows > 0)
+        {
+            while ($this->row = $this->result->fetch_assoc())
+            {
+                $userCards[] = array($this->row['u_username'],
+                                     $this->row['u_email'],
+                                     $this->row['u_realname'],
+                                     $this->row['u_image'],
+                                     $this->row['u_regdate']);
+            }
+        }
+        else
+        {
+            header("Location: index.php?errorpage=fail_userlist");
+            exit();
+        }
+
+        return $userCards;
+    }
+
 }
 
 ################################################################################
