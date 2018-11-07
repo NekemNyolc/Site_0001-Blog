@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2018 at 12:36 PM
+-- Generation Time: Nov 07, 2018 at 01:43 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -77,7 +77,7 @@ CREATE TABLE `users` (
   `u_password` blob NOT NULL,
   `u_email` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
   `u_realname` varchar(255) COLLATE utf8_hungarian_ci DEFAULT NULL,
-  `u_image` text COLLATE utf8_hungarian_ci COMMENT 'Location of the profile image.',
+  `u_image` text COLLATE utf8_hungarian_ci NOT NULL COMMENT 'Location of the profile image.',
   `u_regdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
@@ -86,7 +86,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_id`, `u_username`, `u_password`, `u_email`, `u_realname`, `u_image`, `u_regdate`) VALUES
-(4, 'canis11', 0x8264ecbc0b0545b49dc6a0c2d49766b9b59f9bcab2279b04a4199ca270e4d2423cf25124a41fa31b, 'canis@lupus.familiaris', 'Canis Lupus', NULL, '2018-11-07 11:33:08');
+(4, 'canis11', 0x8264ecbc0b0545b49dc6a0c2d49766b9b59f9bcab2279b04a4199ca270e4d2423cf25124a41fa31b, 'canis@lupus.familiaris', 'Canis Lupus', './images/canis11.jpg', '2018-11-07 12:37:36');
 
 --
 -- Indexes for dumped tables
